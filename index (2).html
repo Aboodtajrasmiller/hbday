@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Age & Moon Phase Calculator</title>
+    <style>
+        :root {
+            --bg-deep: #06060f;
+            --bg-space: #0a0a1e;
+            --card-bg: rgba(15, 15, 40, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #e8e8f0;
+            --text-secondary: #b0b0c8;
+            --accent: #c9a84c;
+            --accent-glow: #f0d060;
+            --moon-lit: #f5f0e3;
+            --moon-dark: #1a1a2e;
+            --button-bg: linear-gradient(135deg, #3a2a6e, #5a3a8e);
+            --button-hover: linear-gradient(135deg, #4a3a7e, #6a4a9e);
+            --input-bg: rgba(20, 20, 45, 0.7);
+            --input-border: rgba(255, 255, 255, 0.2);
+            --glow-blue: rgba(100, 140, 255, 0.3);
+            --glow-amber: rgba(240, 200, 80, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-deep);
+            background: radial-gradient(ellipse at 50% 30%, #0d0d28 0%, #06060f 60%, #020210 100%);
+            overflow-x: hidden;
+            padding: 1.25rem;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Starfield layer ─────────────────────────── */
+        .starfield {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .starfield::before,
+        .starfield::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+        }
+        /* Hundreds of tiny stars via box-shadow */
+        .starfield::before {
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            top: 8%;
+            left: 12%;
+            box-shadow:
+                0 0 0 0 #fff,
+                /* star 1 */
+                45px 12px 0 0 rgba(255, 255, 255, 0.9),
+                120px 8px 0 0 rgba(220, 220, 255, 0.7),
+                210px 55px 0 0 rgba(255, 255, 255, 0.85),
+                340px 18px 0 0 rgba(200, 210, 255, 0.6),
+                480px 70px 0 0 rgba(255, 255, 255, 0.9),
+                560px 5px 0 0 rgba(255, 240, 220, 0.75),
+                15px 90px 0 0 rgba(255, 255, 255, 0.7),
+                95px 140px 0 0 rgba(220, 230, 255, 0.8),
+                180px 100px 0 0 rgba(255, 255, 255, 0.55),
+                270px 150px 0 0 rgba(255, 255, 255, 0.9),
+                380px 120px 0 0 rgba(200, 215, 255, 0.65),
+                500px 160px 0 0 rgba(255, 255, 255, 0.8),
+                600px 95px 0 0 rgba(255, 250, 235, 0.7),
+                50px 200px 0 0 rgba(255, 255, 255, 0.6),
+                160px 250px 0 0 rgba(220, 225, 255, 0.85),
+                290px 210px 0 0 rgba(255, 255, 255, 0.5),
+                410px 260px 0 0 rgba(255, 255, 255, 0.9),
+                530px 200px 0 0 rgba(200, 210, 255, 0.7),
+                640px 250px 0 0 rgba(255, 255, 255, 0.75),
+                30px 310px 0 0 rgba(255, 245, 230, 0.8),
+                150px 340px 0 0 rgba(255, 255, 255, 0.55),
+                310px 300px 0 0 rgba(220, 230, 255, 0.9),
+                430px 350px 0 0 rgba(255, 255, 255, 0.65),
+                550px 300px 0 0 rgba(255, 255, 255, 0.8),
+                670px 340px 0 0 rgba(200, 215, 255, 0.7),
+                75px 400px 0 0 rgba(255, 255, 255, 0.9),
+                200px 420px 0 0 rgba(255, 250, 240, 0.6),
+                350px 390px 0 0 rgba(255, 255, 255, 0.75),
+                470px 430px 0 0 rgba(220, 225, 255, 0.85),
+                590px 400px 0 0 rgba(255, 255, 255, 0.55),
+                10px 470px 0 0 rgba(255, 255, 255, 0.7),
+                130px 490px 0 0 rgba(255, 245, 230, 0.8),
+                280px 460px 0 0 rgba(255, 255, 255, 0.9),
+                400px 500px 0 0 rgba(200, 210, 255, 0.65),
+                520px 470px 0 0 rgba(255, 255, 255, 0.75),
+                630px 490px 0 0 rgba(220, 230, 255, 0.8),
+                60px 530px 0 0 rgba(255, 255, 255, 0.6),
+                190px 550px 0 0 rgba(255, 255, 255, 0.85),
+                330px 520px 0 0 rgba(255, 250, 235, 0.7),
+                460px 550px 0 0 rgba(255, 255, 255, 0.9),
+                570px 530px 0 0 rgba(200, 215, 255, 0.55),
+                690px 560px 0 0 rgba(255, 255, 255, 0.75);
+            animation: twinkleStars 4s ease-in-out infinite;
+        }
+        .starfield::after {
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            top: 22%;
+            left: 35%;
+            box-shadow:
+                0 0 0 0 #fff,
+                70px 30px 0 0 rgba(255, 255, 255, 0.7),
+                180px 65px 0 0 rgba(220, 225, 255, 0.6),
+                300px 20px 0 0 rgba(255, 255, 255, 0.85),
+                420px 80px 0 0 rgba(255, 245, 225, 0.7),
+                35px 120px 0 0 rgba(255, 255, 255, 0.9),
+                155px 170px 0 0 rgba(200, 215, 255, 0.55),
+                250px 105px 0 0 rgba(255, 255, 255, 0.75),
+                370px 140px 0 0 rgba(220, 230, 255, 0.8),
+                490px 180px 0 0 rgba(255, 255, 255, 0.65),
+                85px 230px 0 0 rgba(255, 250, 235, 0.9),
+                205px 280px 0 0 rgba(255, 255, 255, 0.6),
+                340px 240px 0 0 rgba(200, 210, 255, 0.85),
+                440px 290px 0 0 rgba(255, 255, 255, 0.7),
+                560px 220px 0 0 rgba(255, 255, 255, 0.75),
+                25px 350px 0 0 rgba(220, 225, 255, 0.8),
+                145px 380px 0 0 rgba(255, 255, 255, 0.55),
+                275px 330px 0 0 rgba(255, 245, 230, 0.9),
+                395px 370px 0 0 rgba(255, 255, 255, 0.7),
+                510px 360px 0 0 rgba(200, 215, 255, 0.6),
+                625px 400px 0 0 rgba(255, 255, 255, 0.85);
+            animation: twinkleStars2 5s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes twinkleStars {
+            0%,
+            100% {
+                opacity: 0.85;
+            }
+            30% {
+                opacity: 0.4;
+            }
+            60% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 0.55;
+            }
+        }
+        @keyframes twinkleStars2 {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+            25% {
+                opacity: 1;
+            }
+            55% {
+                opacity: 0.35;
+            }
+            75% {
+                opacity: 0.9;
+            }
+        }
+
+        /* ── Shooting star ──────────────────────────── */
+        .shooting-star {
+            position: fixed;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+            border-radius: 1px;
+            top: 15%;
+            left: 70%;
+            transform: rotate(-35deg);
+            animation: shoot 6s ease-in infinite 2s;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+        }
+        @keyframes shoot {
+            0% {
+                opacity: 0;
+                transform: rotate(-35deg) translateX(0) translateY(0);
+            }
+            4% {
+                opacity: 1;
+            }
+            8% {
+                opacity: 0;
+                transform: rotate(-35deg) translateX(-300px) translateY(300px);
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(-35deg) translateX(-300px) translateY(300px);
+            }
+        }
+
+        /* ── Main container ─────────────────────────── */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        /* ── Header ─────────────────────────────────── */
+        .header {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+        .header-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.35rem;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+        @keyframes floatIcon {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+            background: linear-gradient(180deg, #f5f0e8 0%, #c9b880 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+        .header .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            font-weight: 400;
+        }
+
+        /* ── Input card ─────────────────────────────── */
+        .input-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 1.25rem;
+            padding: 1.75rem 1.5rem;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+        }
+        .input-card:hover {
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06),
+                0 0 60px var(--glow-blue);
+        }
+        .input-card label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .input-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .input-row input[type="date"] {
+            flex: 1;
+            min-width: 180px;
+            padding: 0.8rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            letter-spacing: 0.03em;
+            outline: none;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .input-row input[type="date"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--glow-amber), 0 0 0 3px rgba(201, 168, 76, 0.1);
+        }
+        .input-row input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.85);
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .input-row input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+        .btn-calculate {
+            padding: 0.8rem 1.6rem;
+            border-radius: 0.75rem;
+            border: none;
+            background: var(--button-bg);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(80, 50, 140, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-calculate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 60%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .btn-calculate:hover {
+            background: var(--button-hover);
+            box-shadow: 0 6px 25px rgba(100, 60, 170, 0.5);
+            transform: translateY(-1px);
+        }
+        .btn-calculate:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(80, 50, 140, 0.3);
+        }
+        .btn-calculate:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        /* ── Error message ──────────────────────────── */
+        .error-msg {
+            color: #f08080;
+            font-size: 0.85rem;
+            margin-top: 0.6rem;
+            min-height: 1.3em;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+        }
+
+        /* ── Result card ────────────────────────────── */
+        .result-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 1.25rem;
+            padding: 1.75rem 1.5rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            display: none;
+            /* hidden by default */
+            animation: cardReveal 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            transition: box-shadow 0.5s ease;
+        }
+        .result-card.visible {
+            display: block;
+        }
+        .result-card.glow {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 50px var(--glow-amber),
+                0 0 100px var(--glow-blue), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ── Result content layout ──────────────────── */
+        .result-top {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .result-info {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        .result-birthdate {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+        }
+        .result-age {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+        }
+        .result-phase-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent-glow);
+            letter-spacing: 0.03em;
+            margin-top: 0.4rem;
+        }
+        .result-phase-detail {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+            margin-top: 0.15rem;
+        }
+
+        /* ── Moon visual ────────────────────────────── */
+        .moon-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .moon-glow-ring {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: transparent;
+            box-shadow: 0 0 30px rgba(200, 180, 140, 0.35), 0 0 60px rgba(180, 160, 220, 0.25);
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+        .moon-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 25px rgba(200, 190, 160, 0.3);
+        }
+        .moon-surface {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #fdfaf3 0%, #f0e8d5 35%, #d8ccb0 100%);
+            /* Subtle crater-like texture hints */
+            box-shadow: inset 0 0 15px rgba(180, 160, 130, 0.3),
+                inset 0 2px 3px rgba(255, 255, 255, 0.5);
+        }
+        .moon-shadow-overlay {
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #12121f;
+            /* Slightly bluish dark */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            z-index: 2;
+        }
+        /* Stars inside the moon container (visible during partial phases) */
+        .moon-stars {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .moon-stars.visible {
+            opacity: 0.6;
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .header-icon {
+                font-size: 2.4rem;
+            }
+            .input-card {
+                padding: 1.25rem 1rem;
+                border-radius: 1rem;
+            }
+            .result-card {
+                padding: 1.25rem 1rem;
+                border-radius: 1rem;
+            }
+            .input-row {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .input-row input[type="date"] {
+                width: 100%;
+                min-width: auto;
+            }
+            .btn-calculate {
+                width: 100%;
+                text-align: center;
+            }
+            .result-top {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .moon-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+            .moon-container {
+                width: 80px;
+                height: 80px;
+            }
+            .moon-shadow-overlay {
+                width: 80px;
+                height: 80px;
+            }
+            .moon-glow-ring {
+                width: 105px;
+                height: 105px;
+            }
+            .result-age {
+                font-size: 1.3rem;
+            }
+            .result-phase-name {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 350px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .input-card {
+                padding: 1rem 0.75rem;
+            }
+            .result-card {
+                padding: 1rem 0.75rem;
+            }
+            .moon-container {
+                width: 70px;
+                height: 70px;
+            }
+            .moon-shadow-overlay {
+                width: 70px;
+                height: 70px;
+            }
+            .moon-glow-ring {
+                width: 90px;
+                height: 90px;
+            }
+            .result-age {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Starfield background -->
+    <div class="starfield" aria-hidden="true"></div>
+    <div class="shooting-star" aria-hidden="true"></div>
+
+    <!-- Main container -->
+    <main class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <span class="header-icon">🌙</span>
+            <h1>Birthday Moon &amp; Age</h1>
+            <p class="subtitle">Discover the moon phase on the day you were born</p>
+        </header>
+
+        <!-- Input card -->
+        <div class="input-card">
+            <label for="birthDate">Select your birth date</label>
+            <div class="input-row">
+                <input type="date" id="birthDate" aria-label="Birth date" max="">
+                <button class="btn-calculate" id="btnCalculate" type="button">Calculate</button>
+            </div>
+            <p class="error-msg" id="errorMsg" aria-live="polite"></p>
+        </div>
+
+        <!-- Result card (hidden initially) -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+            <div class="result-top">
+                <!-- Moon visual -->
+                <div class="moon-wrapper">
+                    <div class="moon-glow-ring" id="moonGlowRing"></div>
+                    <div class="moon-container" id="moonContainer">
+                        <div class="moon-surface"></div>
+                        <div class="moon-stars" id="moonStars"></div>
+                        <div class="moon-shadow-overlay" id="moonShadow"></div>
+                    </div>
+                </div>
+                <!-- Text info -->
+                <div class="result-info">
+                    <p class="result-birthdate" id="resultBirthdate"></p>
+                    <p class="result-age" id="resultAge"></p>
+                    <p class="result-phase-name" id="resultPhaseName"></p>
+                    <p class="result-phase-detail" id="resultPhaseDetail"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            // ──────────────────────────────────────────────
+            // DOM references
+            // ──────────────────────────────────────────────
+            const birthDateInput = document.getElementById('birthDate');
+            const btnCalculate = document.getElementById('btnCalculate');
+            const errorMsgEl = document.getElementById('errorMsg');
+            const resultCard = document.getElementById('resultCard');
+            const resultBirthdate = document.getElementById('resultBirthdate');
+            const resultAge = document.getElementById('resultAge');
+            const resultPhaseName = document.getElementById('resultPhaseName');
+            const resultPhaseDetail = document.getElementById('resultPhaseDetail');
+            const moonShadow = document.getElementById('moonShadow');
+            const moonGlowRing = document.getElementById('moonGlowRing');
+            const moonStars = document.getElementById('moonStars');
+            const moonContainer = document.getElementById('moonContainer');
+
+            // Set the max date to today (prevents future date selection via the picker)
+            function setMaxDate() {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                birthDateInput.max = `${yyyy}-${mm}-${dd}`;
+            }
+            setMaxDate();
+
+            // ──────────────────────────────────────────────
+            // Moon phase calculation
+            // Uses a simplified lunar cycle of 29.53 days
+            // Reference New Moon: January 6, 2000, 18:14 UTC
+            // ──────────────────────────────────────────────
+            const LUNAR_CYCLE_DAYS = 29.53;
+            const HALF_CYCLE = LUNAR_CYCLE_DAYS / 2; // ~14.765 days
+            const REFERENCE_NEW_MOON = new Date(Date.UTC(2000, 0, 6, 18, 14, 0)); // Jan 6, 2000 18:14 UTC
+
+            /**
+             * Calculate the moon's "age" in days since the last new moon.
+             * @param {Date} date - The date to calculate for (treated as UTC midnight for consistency)
+             * @returns {number} Moon age in days (0 to 29.53)
+             */
+            function getMoonAge(date) {
+                // Use noon UTC to avoid timezone edge issues
+                const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0));
+                const diffMs = utcDate - REFERENCE_NEW_MOON;
+                const diffDays = diffMs / (1000 * 60 * 60 * 24);
+                let moonAge = diffDays % LUNAR_CYCLE_DAYS;
+                // Ensure positive result (JavaScript's % preserves sign of dividend)
+                if (moonAge < 0) {
+                    moonAge += LUNAR_CYCLE_DAYS;
+                }
+                return moonAge;
+            }
+
+            /**
+             * Get the moon phase index (0-7) and name based on moon age.
+             * 0 = New Moon
+             * 1 = Waxing Crescent
+             * 2 = First Quarter
+             * 3 = Waxing Gibbous
+             * 4 = Full Moon
+             * 5 = Waning Gibbous
+             * 6 = Last Quarter
+             * 7 = Waning Crescent
+             */
+            const PHASE_NAMES = [
+                'New Moon',
+                'Waxing Crescent',
+                'First Quarter',
+                'Waxing Gibbous',
+                'Full Moon',
+                'Waning Gibbous',
+                'Last Quarter',
+                'Waning Crescent',
+            ];
+            const PHASE_EMOJIS = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+
+            function getMoonPhase(moonAge) {
+                // Each phase spans LUNAR_CYCLE_DAYS / 8 ≈ 3.69125 days
+                const phaseWidth = LUNAR_CYCLE_DAYS / 8;
+                // Offset so New Moon is centered at age 0
+                const adjustedAge = (moonAge + phaseWidth / 2) % LUNAR_CYCLE_DAYS;
+                const phaseIndex = Math.floor(adjustedAge / phaseWidth) % 8;
+                return {
+                    index: phaseIndex,
+                    name: PHASE_NAMES[phaseIndex],
+                    emoji: PHASE_EMOJIS[phaseIndex],
+                };
+            }
+
+            /**
+             * Calculate shadow overlay position for the moon visual.
+             * Returns the CSS 'left' value in pixels (relative to a 100px moon container).
+             * - New Moon: shadow at 0px (fully covers moon)
+             * - Full Moon: shadow at -100px (completely off to the left)
+             * - The shadow moves continuously through the cycle.
+             *
+             * For waxing phases (age 0→14.765): shadow moves 0 → -100 (revealing from right)
+             * For waning phases (age 14.765→29.53): shadow moves 100 → 0 (entering from right)
+             */
+            function getShadowPositionPx(moonAge, containerSize) {
+                if (moonAge <= HALF_CYCLE) {
+                    // Waxing: shadow retreats left, revealing light from the right
+                    // At age 0: pos = 0; at age HALF_CYCLE: pos = -containerSize
+                    return -(moonAge / HALF_CYCLE) * containerSize;
+                } else {
+                    // Waning: shadow enters from the right, covering from the right
+                    // At age HALF_CYCLE: pos = containerSize; at age LUNAR_CYCLE_DAYS: pos = 0
+                    const waningProgress = (moonAge - HALF_CYCLE) / HALF_CYCLE; // 0 → 1
+                    return containerSize - waningProgress * containerSize; // containerSize → 0
+                }
+            }
+
+            /**
+             * Calculate illuminated fraction (0 = fully dark, 1 = fully lit).
+             * Uses a cosine-based smooth curve.
+             */
+            function getIlluminatedFraction(moonAge) {
+                return (1 - Math.cos((2 * Math.PI * moonAge) / LUNAR_CYCLE_DAYS)) / 2;
+            }
+
+            // ──────────────────────────────────────────────
+            // Age calculation (handles leap years carefully)
+            // ──────────────────────────────────────────────
+            function isLeapYear(year) {
+                return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+            }
+
+            /**
+             * Calculate exact age in years, months, and days.
+             * @param {Date} birthDate
+             * @param {Date} today
+             * @returns {{ years: number, months: number, days: number }}
+             */
+            function calculateAge(birthDate, today) {
+                let years = today.getFullYear() - birthDate.getFullYear();
+                let months = today.getMonth() - birthDate.getMonth();
+                let days = today.getDate() - birthDate.getDate();
+
+                // Adjust if the birthday hasn't occurred yet this year
+                if (months < 0 || (months === 0 && days < 0)) {
+                    years--;
+                    months += 12;
+                }
+                // Now adjust days
+                if (days < 0) {
+                    // Borrow days from the previous month
+                    const prevMonthIndex = (today.getMonth() - 1 + 12) % 12;
+                    const prevMonthYear =
+                        today.getMonth() === 0 ? today.getFullYear() - 1 : today.getFullYear();
+                    const daysInPrevMonth = new Date(prevMonthYear, prevMonthIndex + 1, 0).getDate();
+                    days += daysInPrevMonth;
+                    months--;
+                    // If months went negative after borrowing, adjust
+                    if (months < 0) {
+                        months += 12;
+                        years--;
+                    }
+                }
+                // Clamp to reasonable values
+                if (years < 0) years = 0;
+                if (months < 0) months = 0;
+                if (days < 0) days = 0;
+
+                return { years, months, days };
+            }
+
+            // ──────────────────────────────────────────────
+            // Validation
+            // ──────────────────────────────────────────────
+            function validateBirthDate(date) {
+                if (!date || isNaN(date.getTime())) {
+                    return 'Please enter a valid date.';
+                }
+                const now = new Date();
+                // Compare using local date values to avoid time-of-day issues
+                const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const birthDateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                if (birthDateOnly > todayDate) {
+                    return 'Birth date cannot be in the future.';
+                }
+                // Reject dates before year 1800 (likely input errors)
+                if (date.getFullYear() < 1800) {
+                    return 'Please enter a birth date after the year 1800.';
+                }
+                // Check for impossibly old ages (> 150 years)
+                const ageCheck = calculateAge(birthDateOnly, todayDate);
+                if (ageCheck.years > 150) {
+                    return 'Please enter a realistic birth date (less than 150 years ago).';
+                }
+                return null; // No error
+            }
+
+            // ──────────────────────────────────────────────
+            // Update the moon visual
+            // ──────────────────────────────────────────────
+            function updateMoonVisual(moonAge, containerSize) {
+                const shadowPos = getShadowPositionPx(moonAge, containerSize);
+                moonShadow.style.left = shadowPos + 'px';
+
+                // Update glow intensity based on illuminated fraction
+                const illumFraction = getIlluminatedFraction(moonAge);
+                const glowIntensity = 0.08 + illumFraction * 0.55; // 0.08 to 0.63
+                const glowColor = illumFraction > 0.5 ?
+                    `rgba(240,210,120,${glowIntensity})` :
+                    `rgba(160,180,220,${glowIntensity})`;
+                moonGlowRing.style.boxShadow =
+                    `0 0 ${25 + illumFraction * 45}px ${glowColor}, 0 0 ${50 + illumFraction * 70}px rgba(180,160,220,${glowIntensity * 0.7})`;
+
+                // Show tiny stars in the dark portion for crescent phases
+                if (illumFraction < 0.35 && illumFraction > 0.02) {
+                    moonStars.classList.add('visible');
+                } else {
+                    moonStars.classList.remove('visible');
+                }
+            }
+
+            // ──────────────────────────────────────────────
+            // Main calculation handler
+            // ──────────────────────────────────────────────
+            function handleCalculate() {
+                const inputValue = birthDateInput.value;
+                errorMsgEl.textContent = '';
+
+                // Parse the date input (YYYY-MM-DD format, local time)
+                if (!inputValue) {
+                    errorMsgEl.textContent = 'Please select a birth date.';
+                    resultCard.classList.remove('visible', 'glow');
+                    return;
+                }
+                const [yearStr, monthStr, dayStr] = inputValue.split('-');
+                const year = parseInt(yearStr, 10);
+                const month = parseInt(monthStr, 10) - 1; // JS months are 0-indexed
+                const day = parseInt(dayStr, 10);
+                const birthDate = new Date(year, month, day);
+
+                // Validate
+                const errorMsg = validateBirthDate(birthDate);
+                if (errorMsg) {
+                    errorMsgEl.textContent = errorMsg;
+                    resultCard.classList.remove('visible', 'glow');
+                    return;
+                }
+
+                // Calculate age
+                const now = new Date();
+                const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const age = calculateAge(
+                    new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDate()),
+                    todayDate
+                );
+
+                // Calculate moon phase
+                const moonAge = getMoonAge(birthDate);
+                const phase = getMoonPhase(moonAge);
+
+                // ── Display results ──────────────────────
+                // Format birth date nicely
+                const birthDateFormatted = birthDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+                resultBirthdate.textContent = 'Born: ' + birthDateFormatted;
+
+                // Format age
+                const ageParts = [];
+                if (age.years > 0) ageParts.push(`${age.years} year${age.years !== 1 ? 's' : ''}`);
+                if (age.months > 0) ageParts.push(`${age.months} month${age.months !== 1 ? 's' : ''}`);
+                ageParts.push(`${age.days} day${age.days !== 1 ? 's' : ''}`);
+                resultAge.textContent = ageParts.join(', ');
+
+                // Phase name with emoji
+                resultPhaseName.textContent = `${phase.emoji} ${phase.name}`;
+                resultPhaseDetail.textContent =
+                    `Moon age: ${moonAge.toFixed(2)} days · Illumination: ${(getIlluminatedFraction(moonAge) * 100).toFixed(0)}%`;
+
+                // Update moon visual
+                const containerSize = moonContainer.clientWidth || 100;
+                updateMoonVisual(moonAge, containerSize);
+
+                // Show result card with animation
+                resultCard.classList.add('visible');
+                // Trigger reflow to restart animation
+                resultCard.style.animation = 'none';
+                resultCard.offsetHeight; // force reflow
+                resultCard.style.animation = '';
+                // Add glow after a brief delay
+                setTimeout(() => {
+                    resultCard.classList.add('glow');
+                }, 300);
+
+                // Scroll result card into view on mobile
+                if (window.innerWidth < 600) {
+                    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+
+            // ──────────────────────────────────────────────
+            // Event listeners
+            // ──────────────────────────────────────────────
+            btnCalculate.addEventListener('click', handleCalculate);
+
+            // Allow pressing Enter to calculate
+            birthDateInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleCalculate();
+                }
+            });
+
+            // Recalculate moon visual on window resize (container size may change)
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (resultCard.classList.contains('visible') && birthDateInput.value) {
+                        const [y, m, d] = birthDateInput.value.split('-').map(Number);
+                        const bd = new Date(y, m - 1, d);
+                        if (!isNaN(bd.getTime())) {
+                            const moonAge = getMoonAge(bd);
+                            const containerSize = moonContainer.clientWidth || 100;
+                            updateMoonVisual(moonAge, containerSize);
+                        }
+                    }
+                }, 250);
+            });
+
+            // ──────────────────────────────────────────────
+            // Initialize: pre-fill with an example date (optional)
+            // Leaving it empty so the user must pick a date.
+            // ──────────────────────────────────────────────
+            console.log('🌙 Birthday Age & Moon Phase Calculator ready!');
+            console.log('   Select your birth date and click Calculate.');
+        })();
+    </script>
+</body>
+</html>
