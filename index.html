@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Software Security MCQ Exam | English Questions & Arabic Explanation</title>
+    <style>
+        :root {
+            --bg: #0f0f1a;
+            --surface: #1a1a2e;
+            --surface2: #16213e;
+            --primary: #4f8cff;
+            --primary-glow: #4f8cff55;
+            --accent: #00d4aa;
+            --danger: #ff4757;
+            --warning: #ffa502;
+            --text: #e8e8f0;
+            --text2: #b0b0c0;
+            --border: #2a2a40;
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tajawal', 'Cairo', sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse at 20% 20%, #1a3a5c22 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 60%, #0d2b4522 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 10%, #4f8cff11 0%, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.15;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .app-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 800px;
+            background: var(--surface);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow), 0 0 0 1px #ffffff08 inset;
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .app-header {
+            background: var(--surface2);
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .app-header .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .app-header .logo-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #4f8cff, #00d4aa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px #4f8cff44;
+        }
+        .app-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+        .app-header .subtitle {
+            font-size: 0.8rem;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+        .header-stats {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .stat-badge {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            white-space: nowrap;
+        }
+        .timer-badge {
+            background: #1a1a2e;
+            border: 2px solid var(--warning);
+            color: var(--warning);
+            animation: pulse-timer 2s ease-in-out infinite;
+        }
+        @keyframes pulse-timer {
+            0%,
+            100% {
+                border-color: var(--warning);
+                box-shadow: 0 0 0px #ffa50200;
+            }
+            50% {
+                border-color: #ffa50288;
+                box-shadow: 0 0 16px #ffa50233;
+            }
+        }
+
+        .progress-wrap {
+            padding: 6px 28px;
+            background: #0a0a14;
+        }
+        .progress-outer {
+            height: 6px;
+            background: #2a2a40;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-inner {
+            height: 100%;
+            background: linear-gradient(90deg, #4f8cff, #00d4aa);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 12px #4f8cff66;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text2);
+            margin-top: 6px;
+            padding: 0 2px;
+        }
+
+        .quiz-body {
+            padding: 28px;
+            min-height: 400px;
+        }
+        .question-card {
+            background: var(--surface2);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            border: 1px solid var(--border);
+            animation: fadeSlideIn 0.4s ease;
+            transition: all var(--transition);
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .question-number {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: #1a1a30;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            color: var(--text);
+            user-select: none;
+            position: relative;
+        }
+        .option-item:hover {
+            border-color: #4f8cff66;
+            background: #1e1e3a;
+            box-shadow: 0 4px 16px #00000033;
+            transform: translateX(-3px);
+        }
+        .option-item.selected {
+            border-color: var(--primary);
+            background: #1a2a4a;
+            box-shadow: 0 0 20px var(--primary-glow);
+            color: #fff;
+            font-weight: 600;
+        }
+        .option-radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #555;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .option-item.selected .option-radio {
+            border-color: var(--primary);
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .option-item.selected .option-radio::after {
+            opacity: 1;
+        }
+        .option-letter {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.85rem;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .option-item.selected .option-letter {
+            color: #fff;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            padding: 0 28px 28px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 13px 28px;
+            border-radius: 28px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            letter-spacing: 0.2px;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-prev {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+        .btn-prev:hover {
+            border-color: #888;
+            color: #fff;
+        }
+        .btn-next {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 16px #4f8cff44;
+            margin-right: auto;
+        }
+        .btn-next:hover {
+            background: #5a9aff;
+            box-shadow: 0 6px 24px #4f8cff66;
+            transform: translateY(-2px);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #00d4aa, #00b894);
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 4px 20px #00d4aa44;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%,
+            100% {
+                box-shadow: 0 4px 20px #00d4aa44;
+            }
+            50% {
+                box-shadow: 0 8px 36px #00d4aa77;
+            }
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px #00d4aa66;
+        }
+        .btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .btn:active:not(:disabled) {
+            transform: scale(0.96);
+        }
+
+        .results-container {
+            padding: 28px;
+            animation: fadeSlideIn 0.5s ease;
+        }
+        .results-hero {
+            text-align: center;
+            padding: 20px 0 28px;
+        }
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: conic-gradient(#00d4aa calc(var(--score-pct) * 1%),
+                    #2a2a40 calc(var(--score-pct) * 1%));
+            box-shadow: 0 0 40px #00000055;
+        }
+        .score-inner {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .score-number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+        }
+        .score-total {
+            font-size: 0.8rem;
+            color: var(--text2);
+        }
+        .results-grade {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .grade-excellent {
+            color: #00d4aa;
+        }
+        .grade-good {
+            color: #4f8cff;
+        }
+        .grade-fair {
+            color: #ffa502;
+        }
+        .grade-poor {
+            color: #ff4757;
+        }
+        .results-stats {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .result-stat {
+            background: var(--surface2);
+            border-radius: 14px;
+            padding: 14px 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            min-width: 80px;
+        }
+        .result-stat .val {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .result-stat .lbl {
+            font-size: 0.7rem;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+        .val.correct {
+            color: #00d4aa;
+        }
+        .val.wrong {
+            color: #ff4757;
+        }
+        .val.skipped {
+            color: #ffa502;
+        }
+
+        .review-section {
+            max-height: 55vh;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .review-section::-webkit-scrollbar {
+            width: 5px;
+        }
+        .review-section::-webkit-scrollbar-thumb {
+            background: #3a3a55;
+            border-radius: 10px;
+        }
+        .review-card {
+            background: var(--surface2);
+            border-radius: var(--radius-sm);
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .review-card.correct-card {
+            border-left: 4px solid #00d4aa;
+        }
+        .review-card.wrong-card {
+            border-left: 4px solid #ff4757;
+        }
+        .review-card.skipped-card {
+            border-left: 4px solid #ffa502;
+        }
+        .review-q {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .review-answer {
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+        .review-answer .correct-ans {
+            color: #00d4aa;
+            font-weight: 700;
+        }
+        .review-answer .user-ans {
+            color: #ff4757;
+            font-weight: 600;
+            text-decoration: line-through;
+        }
+        .review-explanation {
+            background: #0a0a18;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #c0c0d0;
+            border: 1px solid #222;
+            line-height: 1.6;
+        }
+        .review-explanation strong {
+            color: #ffa502;
+        }
+        .icon-indicator {
+            font-size: 1.2rem;
+            margin-left: 4px;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 40px 28px;
+        }
+        .welcome-icon {
+            font-size: 70px;
+            margin-bottom: 16px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+        .welcome-screen h2 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .welcome-screen p {
+            color: var(--text2);
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin-inline: auto;
+            font-size: 0.95rem;
+        }
+        .btn-start {
+            background: linear-gradient(135deg, #4f8cff, #00d4aa);
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 16px 40px;
+            border-radius: 32px;
+            font-weight: 700;
+            box-shadow: 0 6px 28px #4f8cff55;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+        }
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 36px #4f8cff77;
+        }
+        .feature-grid {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: var(--surface2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .app-header {
+                padding: 16px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .quiz-body {
+                padding: 16px;
+            }
+            .question-card {
+                padding: 16px;
+            }
+            .question-text {
+                font-size: 1rem;
+            }
+            .option-item {
+                padding: 12px 14px;
+                font-size: 0.85rem;
+            }
+            .btn-row {
+                padding: 0 16px 20px;
+                gap: 8px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+            .score-circle {
+                width: 110px;
+                height: 110px;
+            }
+            .score-inner {
+                width: 84px;
+                height: 84px;
+            }
+            .score-number {
+                font-size: 1.8rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="app-container" id="appContainer">
+        <div class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">🛡️</div>
+                <div>
+                    <h1>اختبار أمن البرمجيات</h1>
+                    <div class="subtitle">English Questions • Arabic Explanation</div>
+                </div>
+            </div>
+            <div class="header-stats" id="headerStats">
+                <div class="stat-badge"><span class="icon">📋</span> <span id="qCount">0/0</span></div>
+                <div class="stat-badge timer-badge" id="timerBadge"><span class="icon">⏱</span> <span id="timerDisplay">00:00</span></div>
+            </div>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-outer">
+                <div class="progress-inner" id="progressBar" style="width: 0%;"></div>
+            </div>
+            <div class="progress-label">
+                <span id="progressText">لم يبدأ</span>
+                <span id="progressPercent">0%</span>
+            </div>
+        </div>
+
+        <div id="dynamicContent"></div>
+        <div class="btn-row" id="btnRow"></div>
+    </div>
+
+    <script>
+        (function() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                const size = Math.random() * 6 + 2;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = Math.random() * 18 + 10 + 's';
+                p.style.animationDelay = Math.random() * 15 + 's';
+                particlesContainer.appendChild(p);
+            }
+
+            // ─── Questions: English text, Arabic explanations ───
+            const questions = [{
+                id: 1,
+                q: 'What is the main goal of secure coding?',
+                opts: ['Improve software performance.', 'Prevent security vulnerabilities in software.',
+                    'Increase program complexity.', 'Reduce system memory usage.'
+                ],
+                correct: 1,
+                expl: 'الترميز الآمن يهدف إلى <strong>منع الثغرات الأمنية</strong> من خلال كتابة كود resistant للهجمات مثل SQL Injection و XSS وغيرها.'
+            }, {
+                id: 2,
+                q: 'Which secure coding practice helps prevent SQL injection attacks?',
+                opts: ['Input validation.', 'Data compression.', 'Code duplication.', 'Debugging.'],
+                correct: 0,
+                expl: '<strong>التحقق من صحة الإدخال</strong> يضمن أن البيانات المدخلة مطابقة للتنسيق المتوقع، مما يمنع إدخال أوامر SQL خبيثة.'
+            }, {
+                id: 3,
+                q: 'Storing passwords in plain text is dangerous because:',
+                opts: ['It increases system speed.',
+                    'Attackers can read all passwords if the database is compromised.',
+                    'It improves authentication.', 'It reduces memory usage.'
+                ],
+                correct: 1,
+                expl: 'إذا تم اختراق قاعدة البيانات، فإن <strong>تخزين كلمات المرور كنص واضح</strong> يعني أن المخترق يحصل على جميع كلمات المرور مباشرة دون أي جهد إضافي.'
+            }, {
+                id: 4,
+                q: 'A developer builds SQL queries using string concatenation instead of parameterized queries. Which attack becomes possible?',
+                opts: ['Cross-Site Request Forgery (CSRF).', 'Denial of Service.', 'Buffer Overflow.',
+                    'SQL Injection.'
+                ],
+                correct: 3,
+                expl: 'استخدام <strong>تسلسل النصوص (String Concatenation)</strong> لبناء استعلامات SQL يسمح للمهاجم بحقن أوامر SQL خبيثة عبر حقول الإدخال.'
+            }, {
+                id: 5,
+                q: 'Which method is recommended for secure password storage?',
+                opts: ['Plain text storage.', 'Password hashing.', 'Password printing.', 'Password compression.'],
+                correct: 1,
+                expl: '<strong>تجزئة كلمات المرور (Hashing)</strong> باستخدام خوارزميات مثل bcrypt أو Argon2 تحول كلمة المرور إلى قيمة غير قابلة للعكس، مما يحميها حتى لو تم اختراق قاعدة البيانات.'
+            }, {
+                id: 6,
+                q: 'Showing detailed system error messages to users may lead to:',
+                opts: ['Faster debugging.', 'Information leakage.', 'Better system performance.',
+                    'Improved authentication.'
+                ],
+                correct: 1,
+                expl: 'رسائل الخطأ التفصيلية قد تكشف <strong>معلومات حساسة</strong> مثل بنية قاعدة البيانات أو مسارات الملفات، مما يساعد المهاجمين في التخطيط لهجماتهم.'
+            }, {
+                id: 7,
+                q: 'Which secure coding practice prevents unauthorized system access?',
+                opts: ['Access control.', 'Data compression.', 'Code duplication.', 'Removing authentication.'],
+                correct: 0,
+                expl: '<strong>التحكم في الوصول</strong> يحدد من يمكنه الوصول إلى موارد النظام وماذا يمكنه أن يفعل، مما يمنع الوصول غير المصرح به.'
+            }, {
+                id: 8,
+                q: 'What is input validation used for?',
+                opts: ['Ensuring user input is safe and expected.', 'Increasing database size.', 'Compressing data.',
+                    'Improving network speed.'
+                ],
+                correct: 0,
+                expl: 'التحقق من صحة الإدخال يضمن أن <strong>البيانات المدخلة آمنة ومتوقعة</strong>، مما يمنع معالجة بيانات خبيثة قد تسبب ثغرات أمنية.'
+            }, {
+                id: 9,
+                q: 'What is the main difference between Static Analysis and Dynamic Analysis?',
+                opts: ['Static analysis runs the program.', 'Dynamic analysis checks code without running it.',
+                    'Static analysis examines code without executing it.', 'Both methods are identical.'
+                ],
+                correct: 2,
+                expl: '<strong>التحليل الثابت (SAST)</strong> يفحص الكود المصدري بدون تشغيل البرنامج، بينما التحليل الديناميكي (DAST) يختبر التطبيق أثناء تشغيله.'
+            }, {
+                id: 10,
+                q: 'Which of the following is an example of secure coding practice?',
+                opts: ['Displaying database errors to users.', 'Storing passwords in plain text.',
+                    'Using parameterized queries.', 'Disabling security controls.'
+                ],
+                correct: 2,
+                expl: '<strong>الاستعلامات المعلمية</strong> تفصل بين الكود والبيانات، مما يمنع هجمات حقن SQL بشكل فعال.'
+            }, {
+                id: 11,
+                q: 'The Integrity principle in the CIA model ensures:',
+                opts: ['Data remains unmodified.', 'Data is always available.', 'Data is encrypted.',
+                    'Data is shared publicly.'
+                ],
+                correct: 0,
+                expl: 'مبدأ <strong>السلامة (Integrity)</strong> يضمن أن البيانات تبقى <strong>دون تعديل غير مصرح به</strong>، مما يحافظ على دقتها واكتمالها.'
+            }, {
+                id: 12,
+                q: 'Which practice helps protect sensitive system information?',
+                opts: ['Showing detailed error messages.', 'Hiding internal system errors from users.',
+                    'Printing database queries.', 'Disabling authentication.'
+                ],
+                correct: 1,
+                expl: '<strong>إخفاء أخطاء النظام الداخلية</strong> يمنع تسريب معلومات حساسة قد يستخدمها المهاجمون لاستغلال الثغرات.'
+            }, {
+                id: 13,
+                q: 'A weak password like "123456" represents:',
+                opts: ['Strong authentication.', 'Secure encryption.', 'A security vulnerability.',
+                    'Data compression.'
+                ],
+                correct: 2,
+                expl: 'كلمات المرور الضعيفة هي <strong>ثغرة أمنية</strong> لأنها سهلة التخمين أو الاختراق عبر هجمات القوة العمياء (Brute Force).'
+            }, {
+                id: 14,
+                q: 'Access control is used to:',
+                opts: ['Increase system speed.', 'Control who can access system resources.', 'Compress data.',
+                    'Remove system logs.'
+                ],
+                correct: 1,
+                expl: 'التحكم في الوصول <strong>يحدد الصلاحيات</strong> ويدير من يمكنه الوصول إلى موارد النظام وماذا يمكنه أن يفعل بها.'
+            }, {
+                id: 15,
+                q: 'Which of the following represents the Availability principle?',
+                opts: ['Encrypting passwords.', 'Ensuring systems remain accessible to authorized users.',
+                    'Preventing data modification.', 'Removing access permissions.'
+                ],
+                correct: 1,
+                expl: 'مبدأ <strong>التوفر (Availability)</strong> يضمن أن الأنظمة والخدمات <strong>متاحة للمستخدمين المصرح لهم</strong> عندما يحتاجون إليها.'
+            }, {
+                id: 16,
+                q: 'Which of the following is an example of a functional security requirement?',
+                opts: ['Encryption policy.', 'Authentication mechanism.', 'Security guidelines.', 'Logging policy.'],
+                correct: 1,
+                expl: '<strong>آلية المصادقة</strong> هي متطلب وظيفي لأنها تصف وظيفة محددة يجب على النظام تنفيذها، وليس مجرد سياسة أو إرشاد.'
+            }, {
+                id: 17,
+                q: 'Why is writing software in a high-level programming language considered a secure coding practice?',
+                opts: ['High-level languages always execute programs faster.',
+                    'High-level languages require more memory.',
+                    'High-level languages eliminate the need for testing.',
+                    'High-level languages provide built-in security features and reduce low-level programming errors.'
+                ],
+                correct: 3,
+                expl: 'اللغات عالية المستوى توفر <strong>ميزات أمان مدمجة</strong> مثل إدارة الذاكرة التلقائية والتحقق من الحدود، مما يقلل من الأخطاء الشائعة مثل Buffer Overflow.'
+            }, {
+                id: 18,
+                q: 'Detailed error messages should be:',
+                opts: ['Displayed to all users.', 'Stored in secure logs instead of showing to users.',
+                    'Printed on the screen.', 'Sent to attackers.'
+                ],
+                correct: 1,
+                expl: 'يجب <strong>تخزين رسائل الخطأ التفصيلية في سجلات آمنة</strong> ليتمكن المطورون من مراجعتها، مع عرض رسائل عامة فقط للمستخدمين.'
+            }, {
+                id: 19,
+                q: 'The Confidentiality principle ensures that:',
+                opts: ['Data is always available.', 'Data cannot be modified.',
+                    'Data is protected from unauthorized access.', 'Data is deleted automatically.'
+                ],
+                correct: 2,
+                expl: 'مبدأ <strong>السرية (Confidentiality)</strong> يضمن أن البيانات <strong>محمية من الوصول غير المصرح به</strong>، ولا يمكن الاطلاع عليها إلا من قبل المخولين.'
+            }, {
+                id: 20,
+                q: 'Which of the following is an example of a threat to software security?',
+                opts: ['Strong password policies.', 'Secure coding practices.', 'Malware attacks.',
+                    'Data encryption.'
+                ],
+                correct: 2,
+                expl: '<strong>هجمات البرامج الضارة (Malware)</strong> هي تهديد خارجي يستهدف البرمجيات، بينما الخيارات الأخرى هي إجراءات وقائية وليست تهديدات.'
+            }, {
+                id: 21,
+                q: 'What is the main focus of software security?',
+                opts: ['Securing only computer networks.',
+                    'Building secure software systems and protecting applications from attacks.',
+                    'Managing hardware performance.', 'Developing only mobile applications.'
+                ],
+                correct: 1,
+                expl: 'أمن البرمجيات يركز على <strong>بناء أنظمة برمجية آمنة</strong> وحماية التطبيقات من الهجمات والثغرات طوال دورة حياة التطوير.'
+            }, {
+                id: 22,
+                q: 'Software security aims to protect software systems from vulnerabilities, threats, and attacks that may compromise:',
+                opts: ['Speed, storage, and size.', 'Cost, design, and testing.',
+                    'Confidentiality, Integrity, and Availability.', 'Input, output, and processing.'
+                ],
+                correct: 2,
+                expl: 'أمن البرمجيات يحمي <strong>السرية والسلامة والتوفر (CIA Triad)</strong>، وهي الركائز الثلاث الأساسية لأمن المعلومات.'
+            }, {
+                id: 23,
+                q: 'Which of the following is NOT mentioned as something software security protects against?',
+                opts: ['Malicious attacks.', 'Unauthorized access.', 'Unintended or unsafe behavior.',
+                    'Printer hardware failure only.'
+                ],
+                correct: 3,
+                expl: '<strong>فشل أجهزة الطابعة</strong> هو مشكلة متعلقة بالعتاد (Hardware) وليس من نطاق أمن البرمجيات الذي يركز على حماية الكود والبيانات.'
+            }, {
+                id: 24,
+                q: 'Cybersecurity is broader than software security because it focuses on securing:',
+                opts: ['Only application code.', 'Networks, hardware, and programs.', 'Only databases.',
+                    'Only websites.'
+                ],
+                correct: 1,
+                expl: 'الأمن السيبراني يشمل <strong>الشبكات والأجهزة والبرامج</strong>، بينما أمن البرمجيات يركز بشكل خاص على تأمين الكود والتطبيقات.'
+            }, {
+                id: 25,
+                q: 'Software security practices are integrated into which lifecycle?',
+                opts: ['HR lifecycle.', 'Financial lifecycle.', 'Software Development Lifecycle (SDLC).',
+                    'Marketing lifecycle.'
+                ],
+                correct: 2,
+                expl: 'ممارسات الأمان تُدمج في <strong>دورة حياة تطوير البرمجيات (SDLC)</strong> لضمان بناء الأمان من البداية وليس كفكرة لاحقة.'
+            }, {
+                id: 26,
+                q: 'One primary objective of software security is to:',
+                opts: ['Increase software price.', 'Reduce risks proactively.',
+                    'Eliminate the need for testing.', 'Remove all users from the system.'
+                ],
+                correct: 1,
+                expl: 'الهدف هو <strong>تقليل المخاطر بشكل استباقي</strong> من خلال تحديد الثغرات ومعالجتها قبل أن يتم استغلالها.'
+            }, {
+                id: 27,
+                q: 'Which of the following is a reason why software security is important?',
+                opts: ['It reduces the need for documentation.', 'It guarantees unlimited storage.',
+                    'It helps protect sensitive personal and financial data.', 'It replaces all regulations.'
+                ],
+                correct: 2,
+                expl: 'أمن البرمجيات <strong>يحمي البيانات الشخصية والمالية الحساسة</strong> من السرقة والاختراق، وهو أمر بالغ الأهمية في العصر الرقمي.'
+            }, {
+                id: 28,
+                q: 'Which of the following is an example of data security?',
+                opts: ['Code review.', 'Encryption of data during storage or transition.',
+                    'Designing user interfaces.', 'Increasing processor speed.'
+                ],
+                correct: 1,
+                expl: '<strong>تشفير البيانات</strong> أثناء التخزين (at rest) أو النقل (in transit) هو إجراء أساسي لحماية البيانات من الوصول غير المصرح به.'
+            }, {
+                id: 29,
+                q: 'What vulnerability occurs when a program writes more data into a buffer than it can hold?',
+                opts: ['Broken authentication.', 'Improper error handling.', 'Buffer overflow.',
+                    'Insecure configuration.'
+                ],
+                correct: 2,
+                expl: '<strong>تجاوز سعة المخزن المؤقت (Buffer Overflow)</strong> يحدث عندما تتم كتابة بيانات أكثر من السعة المخصصة، مما قد يسمح للمهاجم بتنفيذ كود خبيث.'
+            }, {
+                id: 30,
+                q: 'According to secure software principles, programs should operate with:',
+                opts: ['Maximum privileges.', 'Minimum required privileges.',
+                    'Administrator rights at all times.', 'No authentication controls.'
+                ],
+                correct: 1,
+                expl: 'مبدأ <strong>الصلاحيات الأقل (Least Privilege)</strong> ينص على أن البرامج يجب أن تعمل بأقل صلاحيات ضرورية لإنجاز مهامها.'
+            }, {
+                id: 31,
+                q: 'Software security requirements are mainly used to:',
+                opts: ['Increase application graphics quality.',
+                    'Define conditions needed to protect assets, systems, and users.', 'Replace system testing.',
+                    'Eliminate all software bugs.'
+                ],
+                correct: 1,
+                expl: 'متطلبات الأمان <strong>تحدد الشروط اللازمة لحماية الأصول والأنظمة والمستخدمين</strong>، وهي أساس بناء نظام آمن.'
+            }, {
+                id: 32,
+                q: 'Security is generally classified as a:',
+                opts: ['Functional requirement only.', 'Non-functional requirement.', 'Financial requirement.',
+                    'Hardware requirement.'
+                ],
+                correct: 1,
+                expl: 'الأمان يُصنف عادةً كـ <strong>متطلب غير وظيفي</strong> لأنه يصف جودة النظام وليس وظيفة محددة، رغم أن بعض جوانبه قد تكون وظيفية.'
+            }, {
+                id: 33,
+                q: 'Which of the following is an example of a functional security requirement?',
+                opts: ['The system must follow GDPR.', 'The system must implement multi-factor authentication.',
+                    'The system must be low cost.', 'The system must use modern design colors.'
+                ],
+                correct: 1,
+                expl: '<strong>تنفيذ المصادقة متعددة العوامل</strong> هو متطلب وظيفي محدد يصف ما يجب على النظام فعله، وليس مجرد خاصية عامة.'
+            }, {
+                id: 34,
+                q: 'Which requirement helps ensure that sensitive information is accessible only to authorized users?',
+                opts: ['Availability requirement.', 'Integrity requirement.', 'Confidentiality requirement.',
+                    'Performance requirement.'
+                ],
+                correct: 2,
+                expl: '<strong>متطلب السرية</strong> يضمن أن المعلومات الحساسة لا يمكن الوصول إليها إلا من قبل المستخدمين المصرح لهم بذلك.'
+            }, {
+                id: 35,
+                q: 'Which of the following belongs to integrity requirements?',
+                opts: ['Backup mechanisms.', 'Hashing and digital signatures.', 'Multi-factor authentication.',
+                    'System redundancy.'
+                ],
+                correct: 1,
+                expl: '<strong>التجزئة (Hashing) والتوقيعات الرقمية</strong> تضمن سلامة البيانات عن طريق التحقق من عدم تعديلها أو العبث بها.'
+            }, {
+                id: 36,
+                q: 'Which step comes first in defining security requirements?',
+                opts: ['Define security controls.', 'Identify sensitive assets.', 'Document requirements clearly.',
+                    'Analyze regulatory requirements.'
+                ],
+                correct: 1,
+                expl: 'الخطوة الأولى هي <strong>تحديد الأصول الحساسة</strong> التي تحتاج إلى حماية، قبل الانتقال إلى تحديد الضوابط والمتطلبات.'
+            }, {
+                id: 37,
+                q: 'A risk exists when:',
+                opts: ['A developer writes documentation.', 'A threat exploits a vulnerability in an asset.',
+                    'A system is powered off.', 'A password is changed regularly.'
+                ],
+                correct: 1,
+                expl: 'الخطر ينشأ عندما <strong>يستغل تهديد (Threat) ثغرة (Vulnerability) في أصل (Asset)</strong>، وهذا هو التعريف الأساسي للمخاطرة في أمن المعلومات.'
+            }, {
+                id: 38,
+                q: 'Which of the following is considered a vulnerability in risk assessment?',
+                opts: ['Hackers.', 'Malware.', 'Weak passwords.', 'User data.'],
+                correct: 2,
+                expl: '<strong>كلمات المرور الضعيفة</strong> هي ثغرة في النظام لأنها نقطة ضعف يمكن استغلالها. الهاكرز والبرامج الضارة هي تهديدات، وليست ثغرات.'
+            }, {
+                id: 39,
+                q: 'In the risk assessment process, evaluating likelihood and impact is part of:',
+                opts: ['Step 1: Identify Assets.', 'Step 2: Identify Threats.', 'Step 4: Analyze Risk Level.',
+                    'Step 5: Prioritize Risks.'
+                ],
+                correct: 2,
+                expl: '<strong>تحليل مستوى الخطر</strong> يتضمن تقييم احتمالية حدوث الهجوم وتأثيره المحتمل لتحديد مستوى الخطورة.'
+            }, {
+                id: 40,
+                q: 'Which risk mitigation strategy involves implementing controls such as encryption and multi-factor authentication?',
+                opts: ['Risk avoidance.', 'Risk reduction.', 'Risk transfer.', 'Risk acceptance.'],
+                correct: 1,
+                expl: '<strong>تقليل المخاطر (Risk Reduction)</strong> يتضمن تنفيذ ضوابط أمنية مثل التشفير والمصادقة متعددة العوامل لتقليل احتمالية أو تأثير الهجوم.'
+            }, {
+                id: 41,
+                q: 'In most secure systems, which process must occur before authorization can be applied?',
+                opts: ['Authentication.', 'Encryption.', 'Isolation.', 'Threat modeling.'],
+                correct: 0,
+                expl: '<strong>المصادقة</strong> يجب أن تسبق التفويض؛ يجب التحقق من هوية المستخدم أولاً قبل تحديد ما يُسمح له بفعله.'
+            }, {
+                id: 42,
+                q: 'Which of the following best describes the main purpose of the Least Privilege principle?',
+                opts: ['Giving users full administrative access.',
+                    'Limiting permissions to reduce the potential damage from attacks.', 'Encrypting all system data.',
+                    'Increasing system performance.'
+                ],
+                correct: 1,
+                expl: 'مبدأ <strong>الصلاحيات الأقل</strong> يهدف إلى <strong>تقييد الصلاحيات</strong> بحيث إذا تم اختراق حساب ما، يكون الضرر محدوداً.'
+            }, {
+                id: 43,
+                q: 'In threat modeling, identifying assets helps developers to:',
+                opts: ['determine which system components need protection.', 'increase processor speed.',
+                    'simplify authentication.', 'encrypt system files.'
+                ],
+                correct: 0,
+                expl: 'تحديد الأصول يساعد في <strong>معرفة مكونات النظام التي تحتاج إلى حماية</strong>، وهو أساس نمذجة التهديدات الفعالة.'
+            }, {
+                id: 44,
+                q: 'The main purpose of compartmentalization is to:',
+                opts: ['increase system speed.', 'provide full access to system resources.',
+                    'limit the impact of a security breach.', 'simplify authentication.'
+                ],
+                correct: 2,
+                expl: '<strong>التجزئة</strong> تحد من تأثير الاختراق الأمني عن طريق عزل المكونات، بحيث لا يؤدي اختراق جزء إلى السيطرة على النظام بأكمله.'
+            }, {
+                id: 45,
+                q: 'A cloud system runs several virtual machines independently so that a compromised machine cannot affect others. This represents:',
+                opts: ['Integrity.', 'Confidentiality.', 'Authentication.', 'Isolation.'],
+                correct: 3,
+                expl: '<strong>العزل (Isolation)</strong> هو فصل المكونات بحيث لا يؤثر فشل أو اختراق أحدها على الآخر، وهو مبدأ أساسي في الأمان.'
+            }, {
+                id: 46,
+                q: 'A weakness in a system that attackers can exploit to compromise security is called:',
+                opts: ['Bug.', 'Vulnerability.', 'Threat.', 'Asset.'],
+                correct: 1,
+                expl: '<strong>الثغرة (Vulnerability)</strong> هي نقطة ضعف في النظام يمكن استغلالها. التهديد هو مصدر الخطر، والأصل هو ما يحتاج الحماية.'
+            }, {
+                id: 47,
+                q: 'In RBAC, a regular user may:',
+                opts: ['access all system features.', 'access only specific features.', 'control system security.',
+                    'manage all databases.'
+                ],
+                correct: 1,
+                expl: 'في RBAC، <strong>المستخدم العادي يصل فقط إلى الميزات المحددة</strong> التي يحتاجها لأداء عمله، وفقاً لمبدأ الصلاحيات الأقل.'
+            }, {
+                id: 48,
+                q: 'Authentication is defined as the process of:',
+                opts: ['determining access permissions.', 'dividing systems into modules.', 'encrypting sensitive data.',
+                    'verifying the identity of a user or system.'
+                ],
+                correct: 3,
+                expl: 'المصادقة هي <strong>التحقق من هوية المستخدم أو النظام</strong> للتأكد من أنه هو من يدّعي أنه، قبل منحه أي صلاحيات.'
+            }, {
+                id: 49,
+                q: 'Access control is the mechanism used to:',
+                opts: ['verify user identity.', 'encrypt network communication.',
+                    'restrict and manage user access to system resources.', 'detect software bugs.'
+                ],
+                correct: 2,
+                expl: 'التحكم في الوصول <strong>يقيد ويدير وصول المستخدم إلى موارد النظام</strong> بناءً على صلاحياته وهويته المثبتة.'
+            }, {
+                id: 50,
+                q: 'A flaw in software code that causes incorrect program behavior but does not necessarily affect system security is called:',
+                opts: ['Vulnerability.', 'Bug.', 'Threat.', 'attack vector.'],
+                correct: 1,
+                expl: '<strong>الـ Bug</strong> هو خطأ برمجي يسبب سلوكاً غير متوقع. إذا كان يمكن استغلاله أمنياً، يصبح ثغرة (Vulnerability).'
+            }, {
+                id: 51,
+                q: 'An attacker prevents legitimate users from accessing a system or its services by overwhelming it with malicious traffic. This situation represents:',
+                opts: ['Data leakage.', 'Unauthorized modification of data.', 'Denial of Service attack.',
+                    'Weak authentication.'
+                ],
+                correct: 2,
+                expl: '<strong>هجوم حجب الخدمة (Denial of Service)</strong> يهدف إلى جعل الخدمة غير متاحة للمستخدمين الشرعيين عن طريق استنزاف الموارد.'
+            }, {
+                id: 52,
+                q: 'A user logs into a system by entering a password and then confirming the login using a fingerprint scan. This login method represents:',
+                opts: ['Single-factor authentication.', 'Weak authentication.', 'No authentication.',
+                    'Multi-factor authentication.'
+                ],
+                correct: 3,
+                expl: '<strong>المصادقة متعددة العوامل (MFA)</strong> تتطلب أكثر من طريقة للتحقق: شيء تعرفه (كلمة المرور) وشيء أنت عليه (بصمة الإصبع).'
+            }, {
+                id: 53,
+                q: 'A user with limited permissions exploits a vulnerability and gains administrative privileges. This situation represents:',
+                opts: ['Vertical Privilege Escalation.', 'Horizontal Privilege Escalation.', 'Code Injection.',
+                    'Information Leakage.'
+                ],
+                correct: 0,
+                expl: '<strong>تصعيد الامتيازات الرأسي</strong> هو عندما يحصل المستخدم على صلاحيات أعلى (مثل صلاحيات المدير) من مستواه الأصلي.'
+            }, {
+                id: 54,
+                q: 'Why is Return-Oriented Programming (ROP) considered an effective attack technique?',
+                opts: ['Because it chains return instructions.', 'Because it encrypts sensitive data.',
+                    'Because it blocks system services.', 'Because it exposes confidential information.'
+                ],
+                correct: 0,
+                expl: 'تقنية ROP فعالة لأنها <strong>تسلسل تعليمات العودة (return instructions)</strong> الموجودة في الكود الشرعي لتنفيذ عمليات خبيثة دون حقن كود جديد.'
+            }, {
+                id: 55,
+                q: 'Which of the following is considered a typical attack vector used by attackers to gain unauthorized access?',
+                opts: ['Encryption.', 'Firewall.', 'Load Balancing.', 'Credential Theft.'],
+                correct: 3,
+                expl: '<strong>سرقة بيانات الاعتماد</strong> هي متجه هجوم شائع حيث يحصل المهاجم على أسماء المستخدمين وكلمات المرور للوصول غير المصرح به.'
+            }, {
+                id: 56,
+                q: 'Which statement best defines an attack vector?',
+                opts: ['A path used by attackers to exploit system vulnerabilities.', 'A tool for encrypting data.',
+                    'A method for network monitoring.', 'A type of hardware protection.'
+                ],
+                correct: 0,
+                expl: '<strong>متجه الهجوم</strong> هو المسار أو الطريقة التي يستخدمها المهاجم للوصول إلى النظام واستغلال ثغراته.'
+            }, {
+                id: 57,
+                q: 'An attack that overwhelms a system using traffic from multiple compromised machines is known as:',
+                opts: ['DoS.', 'DDoS.', 'SQL Injection.', 'ROP.'],
+                correct: 1,
+                expl: '<strong>هجوم DDoS (Distributed Denial of Service)</strong> يستخدم شبكة من الأجهزة المخترقة (Botnet) لإغراق الهدف بحركة مرور من مصادر متعددة.'
+            }, {
+                id: 58,
+                q: 'Sensitive information such as passwords or personal data is unintentionally exposed to unauthorized users. This situation represents:',
+                opts: ['Data Tampering.', 'Denial of Service.', 'Information Leakage.', 'Privilege Escalation.'],
+                correct: 2,
+                expl: '<strong>تسريب المعلومات</strong> هو الكشف غير المقصود عن معلومات حساسة لأطراف غير مصرح لها بالاطلاع عليها.'
+            }, {
+                id: 59,
+                q: 'An attacker inserts a malicious SQL command into a web form to manipulate database queries. This represents:',
+                opts: ['Code Injection.', 'Information Leakage.', 'Privilege Escalation.', 'Code Reuse.'],
+                correct: 0,
+                expl: '<strong>حقن الكود (Code Injection)</strong> - وتحديداً SQL Injection - هو إدخال أوامر خبيثة في حقول الإدخال للتلاعب بقاعدة البيانات.'
+            }, {
+                id: 60,
+                q: 'A program with higher system privileges is tricked into performing an action on behalf of an attacker who has lower privileges. This situation represents:',
+                opts: ['Control-Flow Hijacking.', 'Confused Deputy.', 'Information Leakage.',
+                    'Privilege Escalation.'
+                ],
+                correct: 1,
+                expl: '<strong>مشكلة النائب المرتبك (Confused Deputy)</strong> تحدث عندما يُخدع برنامج ذو صلاحيات عالية لتنفيذ إجراءات لصالح مهاجم ذي صلاحيات أقل.'
+            }, {
+                id: 61,
+                q: 'Web Application Security is the discipline of protecting:',
+                opts: ['Desktop applications only.', 'Web-based systems, web applications, and APIs.',
+                    'Mobile devices only.', 'Hardware components only.'
+                ],
+                correct: 1,
+                expl: 'أمن تطبيقات الويب يركز على حماية <strong>الأنظمة القائمة على الويب وتطبيقات الويب وواجهات API</strong> من التهديدات.'
+            }, {
+                id: 62,
+                q: 'The primary objective of web application security is to:',
+                opts: ['Increase website design quality.', 'Increase advertisements.', 'Improve internet speed.',
+                    'Ensure web applications operate securely and reliably.'
+                ],
+                correct: 3,
+                expl: 'الهدف هو <strong>ضمان عمل تطبيقات الويب بشكل آمن وموثوق</strong> مع حماية البيانات والمستخدمين من الهجمات.'
+            }, {
+                id: 63,
+                q: 'Which of the following is an example of a web application?',
+                opts: ['Online banking systems.', 'E-commerce websites.', 'Social media platforms.',
+                    'All of the above.'
+                ],
+                correct: 3,
+                expl: '<strong>جميع هذه الأمثلة</strong> هي تطبيقات ويب لأنها تعمل عبر المتصفح وتتفاعل مع المستخدمين عبر الإنترنت.'
+            }, {
+                id: 64,
+                q: 'Web applications accept large amounts of user input which increases the risk of:',
+                opts: ['Injection attacks.', 'Hardware failure.', 'Power loss.', 'System error.'],
+                correct: 0,
+                expl: 'كثرة إدخالات المستخدم تزيد من خطر <strong>هجمات الحقن</strong> مثل SQL Injection و XSS إذا لم يتم التحقق من صحة الإدخال.'
+            }, {
+                id: 65,
+                q: 'Data security protects valuable assets such as:',
+                opts: ['Usernames and passwords.', 'Credit card information.', 'Personal and financial records.',
+                    'All of the above.'
+                ],
+                correct: 3,
+                expl: 'أمن البيانات يحمي <strong>جميع أنواع البيانات الحساسة</strong> بما فيها بيانات الاعتماد والمعلومات المالية والسجلات الشخصية.'
+            }, {
+                id: 66,
+                q: 'Data corruption occurs when:',
+                opts: ['Data becomes damaged or altered.', 'Data is encrypted.', 'Data is copied.',
+                    'Data is backed up.'
+                ],
+                correct: 0,
+                expl: '<strong>تلف البيانات</strong> هو عندما تصبح البيانات تالفة أو معدلة بشكل غير مقصود أو غير مصرح به، مما يفقدها دقتها.'
+            }, {
+                id: 67,
+                q: 'Insider threats are caused by:',
+                opts: ['External hackers only.', 'Employees inside the organization.', 'Network devices.',
+                    'Internet providers.'
+                ],
+                correct: 1,
+                expl: '<strong>التهديدات الداخلية</strong> تأتي من الموظفين أو المتعاقدين داخل المؤسسة الذين لديهم وصول شرعي للأنظمة.'
+            }, {
+                id: 68,
+                q: 'Data breaches may lead to:',
+                opts: ['Financial losses.', 'Legal penalties.', 'Reputation damage.', 'All of the above.'],
+                correct: 3,
+                expl: 'خروقات البيانات قد تؤدي إلى <strong>جميع هذه العواقب</strong>: خسائر مالية، عقوبات قانونية، وضرر بالسمعة قد يكون دائماً.'
+            }, {
+                id: 69,
+                q: 'Social engineering attacks mainly exploit:',
+                opts: ['Software vulnerabilities.', 'Hardware vulnerabilities.', 'Human mistakes.',
+                    'Network failures.'
+                ],
+                correct: 2,
+                expl: 'الهندسة الاجتماعية تستغل <strong>الأخطاء البشرية</strong> والثقة بدلاً من الثغرات التقنية، مما يجعلها فعالة بشكل خطير.'
+            }, {
+                id: 70,
+                q: 'Social engineering attackers often take advantage of:',
+                opts: ['Human trust.', 'Lack of security awareness.', 'Curiosity or fear.', 'All of the above.'],
+                correct: 3,
+                expl: 'مهاجمو الهندسة الاجتماعية يستغلون <strong>جميع هذه العوامل</strong>: الثقة، نقص الوعي، والفضول أو الخوف للتلاعب بالضحايا.'
+            }, {
+                id: 71,
+                q: 'Human factors which affect security include:',
+                opts: ['Poor password practices.', 'Sharing sensitive information.', 'Falling for phishing emails.',
+                    'All of the above.'
+                ],
+                correct: 3,
+                expl: '<strong>جميع هذه العوامل البشرية</strong> تؤثر على الأمان، وغالباً ما يكون العنصر البشري هو الحلقة الأضعف في سلسلة الأمان.'
+            }, {
+                id: 72,
+                q: 'Cross-Site Scripting (XSS) is:',
+                opts: ['A DoS attack.', 'A Virus.',
+                    'A type of injection attack where malicious scripts are injected into web pages.', 'A Spyware.'
+                ],
+                correct: 2,
+                expl: '<strong>XSS</strong> هو هجوم حقن يُدخل نصوصاً برمجية خبيثة في صفحات الويب التي يراها المستخدمون الآخرون، مما يسمح بسرقة البيانات أو اختطاف الجلسات.'
+            }, {
+                id: 73,
+                q: 'What is the OWASP Top 10?',
+                opts: ['A list of web design tools.', 'A programming language.', 'A database software.',
+                    'A global list of the most critical security risks affecting web applications.'
+                ],
+                correct: 3,
+                expl: '<strong>OWASP Top 10</strong> هي قائمة بأخطر 10 مخاطر أمنية تواجه تطبيقات الويب، وتُحدث دورياً لتعكس أحدث التهديدات.'
+            }, {
+                id: 74,
+                q: 'Security Misconfiguration refers to:',
+                opts: ['Proper configuration.', 'Improper system or server settings exposing vulnerabilities.',
+                    'Strong authentication.', 'Database encryption.'
+                ],
+                correct: 1,
+                expl: '<strong>سوء التكوين الأمني</strong> هو ترك إعدادات افتراضية غير آمنة أو تكوين غير صحيح للخوادم والأنظمة مما يعرضها للخطر.'
+            }, {
+                id: 75,
+                q: 'In asymmetric encryption, the key used for encryption is the:',
+                opts: ['Public key.', 'Private key.', 'Secret key.', 'Temporary key.'],
+                correct: 0,
+                expl: 'في التشفير غير المتماثل، <strong>المفتاح العام</strong> يُستخدم للتشفير ويمكن مشاركته مع أي شخص، بينما المفتاح الخاص يُستخدم لفك التشفير.'
+            }, {
+                id: 76,
+                q: 'What is impersonation in social engineering?',
+                opts: ['Pretending to be a trusted person to obtain information.', 'Encrypting data.',
+                    'Blocking internet traffic.', 'Updating software.'
+                ],
+                correct: 0,
+                expl: '<strong>انتحال الشخصية</strong> هو التظاهر بأنك شخص موثوق (مثل موظف دعم فني أو مدير) لخداع الضحية وإقناعها بتقديم معلومات حساسة.'
+            }, {
+                id: 77,
+                q: 'What is tailgating in social engineering?',
+                opts: ['Monitoring network traffic.', 'Following an authorized person to enter a restricted area.',
+                    'Encrypting databases.', 'Sending phishing emails.'
+                ],
+                correct: 1,
+                expl: '<strong>التتبع (Tailgating)</strong> هو متابعة شخص مصرح له جسدياً للدخول إلى منطقة محظورة دون الحاجة إلى تصريح مستقل.'
+            }, {
+                id: 78,
+                q: 'Why is a Web Application Firewall (WAF) not considered a complete security solution?',
+                opts: ['Because it works offline.', 'Because it must be combined with other security mechanisms.',
+                    'Because it blocks internet traffic.', 'Because it disables databases.'
+                ],
+                correct: 1,
+                expl: 'WAF هو طبقة حماية مهمة لكنه <strong>يجب أن يُدمج مع آليات أمان أخرى</strong> مثل الترميز الآمن والمصادقة القوية ليكون فعالاً.'
+            }, {
+                id: 79,
+                q: 'Why is encryption important in data security?',
+                opts: ['It deletes sensitive data.', 'It slows systems.',
+                    'It protects data from unauthorized users.', 'It increases storage.'
+                ],
+                correct: 2,
+                expl: 'التشفير <strong>يحمي البيانات من المستخدمين غير المصرح لهم</strong> عن طريق تحويلها إلى صيغة غير قابلة للقراءة بدون المفتاح الصحيح.'
+            }, {
+                id: 80,
+                q: 'Why is security awareness training important for organizations?',
+                opts: ['It improves internet speed.', 'It removes encryption.', 'It replaces firewalls.',
+                    'It helps employees recognize phishing and scams.'
+                ],
+                correct: 3,
+                expl: 'التدريب على الوعي الأمني <strong>يساعد الموظفين على التعرف على هجمات التصيد والاحتيال</strong>، مما يقلل من نجاح هجمات الهندسة الاجتماعية.'
+            }, {
+                id: 81,
+                q: 'When does the secure software life cycle end?',
+                opts: ['After initial design is complete.', 'After the first update is released.',
+                    'When the software is retired and no longer used.', 'When vulnerabilities are patched.'
+                ],
+                correct: 2,
+                expl: 'دورة حياة البرمجيات الآمنة تنتهي <strong>عند إحالة البرنامج للتقاعد</strong> وعدم استخدامه، لأن الأمان مستمر طوال فترة استخدام البرنامج.'
+            }, {
+                id: 82,
+                q: 'Why is continuous testing and updating necessary in secure software development?',
+                opts: ['To reduce development costs.', 'To adapt to changing requirements and fix vulnerabilities.',
+                    'To shorten the software life cycle.', 'To avoid user training.'
+                ],
+                correct: 1,
+                expl: 'الاختبار والتحديث المستمران ضروريان <strong>للتكيف مع المتطلبات المتغيرة وإصلاح الثغرات</strong> الجديدة التي تظهر باستمرار.'
+            }, {
+                id: 83,
+                q: 'What is an example of co-evolution between software and its environment?',
+                opts: ['The release of new programming languages.',
+                    'The evolution of security features in Ubuntu Linux.', 'The retirement of outdated hardware.',
+                    'The introduction of cloud computing.'
+                ],
+                correct: 1,
+                expl: '<strong>تطور ميزات الأمان في Ubuntu Linux</strong> هو مثال على التطور المشترك حيث تتطور البرمجيات استجابة للتهديدات المتغيرة في بيئتها.'
+            }, {
+                id: 84,
+                q: 'Which of the following is NOT mentioned as a focus area of Ubuntu\'s security improvements?',
+                opts: ['Kernel hardening.', 'Filesystem encryption.', 'Mandatory access control.',
+                    'Artificial intelligence integration.'
+                ],
+                correct: 3,
+                expl: '<strong>دمج الذكاء الاصطناعي</strong> لم يُذكر كمجال تركيز في تحسينات أمان Ubuntu، بينما المجالات الأخرى هي مجالات فعلية.'
+            }, {
+                id: 85,
+                q: 'What is the main goal of Ubuntu\'s security features such as safe defaults and trusted platform modules?',
+                opts: ['To make system configuration easier.',
+                    'To increase resilience against unknown or unpatched bugs.', 'To improve user interface design.',
+                    'To reduce hardware costs.'
+                ],
+                correct: 1,
+                expl: 'الهدف هو <strong>زيادة المرونة ضد الأخطاء غير المعروفة أو غير المصححة</strong> من خلال توفير طبقات حماية متعددة.'
+            }, {
+                id: 86,
+                q: 'Jump-Oriented Programming (JOP) relies on:',
+                opts: ['Return instructions.', 'Call instructions.', 'Encryption keys.', 'Jump instructions.'],
+                correct: 3,
+                expl: 'تقنية JOP تعتمد على <strong>تعليمات القفز (jump instructions)</strong> بدلاً من تعليمات العودة، مما يجعلها مختلفة عن تقنية ROP.'
+            }, {
+                id: 87,
+                q: 'Which sanitizer can be used in production with minimal runtime library?',
+                opts: ['ASan.', 'UBSan.', 'TSan.', 'HexType.'],
+                correct: 1,
+                expl: '<strong>UBSan (Undefined Behavior Sanitizer)</strong> يمكن استخدامه في الإنتاج لأنه يحتوي على مكتبة runtime صغيرة وأداء مقبول.'
+            }, {
+                id: 88,
+                q: 'Which of the following best describes the relationship between software and its environment?',
+                opts: ['Independent evolution.', 'Co-evolution.', 'Static dependency.', 'One-time integration.'],
+                correct: 1,
+                expl: 'العلاقة هي <strong>تطور مشترك</strong> حيث تؤثر البرمجيات وبيئتها على بعضهما البعض ويتطوران معاً استجابة للتهديدات والتغيرات.'
+            }, {
+                id: 89,
+                q: 'What is given as an example of co-evolution in the text?',
+                opts: ['Cloud computing adoption.', 'Evolution of Ubuntu Linux security features.',
+                    'Retirement of outdated hardware.', 'Introduction of new programming languages.'
+                ],
+                correct: 1,
+                expl: '<strong>تطور ميزات أمان Ubuntu Linux</strong> هو المثال المعطى على التطور المشترك بين البرمجيات وبيئتها الأمنية.'
+            }, {
+                id: 90,
+                q: 'Initially, Ubuntu Linux had:',
+                opts: ['Strong kernel hardening.', 'Few to no mitigations.', 'Advanced encryption by default.',
+                    'Trusted platform modules enabled.'
+                ],
+                correct: 1,
+                expl: 'في البداية، كان Ubuntu Linux يحتوي على <strong>عدد قليل إلى معدوم من التخفيفات الأمنية</strong>، وتطورت ميزات الأمان مع مرور الوقت.'
+            }, {
+                id: 91,
+                q: 'The design phase of a software project is split into:',
+                opts: ['Requirement specification and concrete design.', 'Testing and deployment.',
+                    'Threat modeling and risk assessment.', 'Maintenance and retirement.'
+                ],
+                correct: 0,
+                expl: 'مرحلة التصميم تنقسم إلى <strong>مواصفات المتطلبات والتصميم الملموس</strong>، حيث تحدد المتطلبات أولاً ثم يتم تصميم الحل.'
+            }, {
+                id: 92,
+                q: 'What does the requirement specification define?',
+                opts: ['Only security constraints.',
+                    'Tangible functionality, features, data formats, and interactions.', 'Hardware requirements.',
+                    'Deployment strategies.'
+                ],
+                correct: 1,
+                expl: 'مواصفات المتطلبات تحدد <strong>الوظائف الملموسة والميزات وتنسيقات البيانات والتفاعلات</strong> التي يجب أن يوفرها النظام.'
+            }, {
+                id: 93,
+                q: 'From a security perspective, the requirement specification is extended with:',
+                opts: ['Encryption algorithms only.',
+                    'Security specification, asset identification, environmental assessment, and use/abuse cases.',
+                    'Deployment scripts.', 'User interface design.'
+                ],
+                correct: 1,
+                expl: 'من منظور أمني، تُضاف <strong>مواصفات الأمان وتحديد الأصول والتقييم البيئي وحالات الاستخدام والإساءة</strong> للمتطلبات.'
+            }, {
+                id: 94,
+                q: 'What does the security specification involve?',
+                opts: ['Threat model and risk assessment.', 'User interface design.', 'Backup procedures.',
+                    'Testing strategies.'
+                ],
+                correct: 0,
+                expl: 'مواصفات الأمان تتضمن <strong>نموذج التهديدات وتقييم المخاطر</strong> لتحديد التهديدات المحتملة وطرق معالجتها.'
+            }, {
+                id: 95,
+                q: 'The asset specification defines:',
+                opts: ['Hardware components used.', 'Data operated on and entities with access.',
+                    'Software licensing terms.', 'Network bandwidth requirements.'
+                ],
+                correct: 1,
+                expl: 'مواصفات الأصول تحدد <strong>البيانات التي يتم تشغيلها والكيانات التي لديها حق الوصول</strong> إليها، مما يساعد في تحديد ما يحتاج الحماية.'
+            }, {
+                id: 96,
+                q: 'Which environment is considered at higher physical risk?',
+                opts: ['A secured facility terminal.', 'A public terminal.', 'A cloud server.', 'A private laptop.'],
+                correct: 1,
+                expl: '<strong>المحطة الطرفية العامة</strong> معرضة لمخاطر مادية أعلى لأن أي شخص يمكنه الوصول إليها فعلياً والتلاعب بها.'
+            }, {
+                id: 97,
+                q: 'Transitioning from requirement specification to design requires:',
+                opts: ['Ignoring security aspects.', 'Including security as integral parts of the design.',
+                    'Focusing only on functional requirements.', 'Removing threat models.'
+                ],
+                correct: 1,
+                expl: 'يجب <strong>تضمين الأمان كأجزاء أساسية من التصميم</strong>، وليس كإضافة لاحقة، لضمان بناء نظام آمن من البداية.'
+            }, {
+                id: 98,
+                q: 'Additional threat modeling during the design phase is based on:',
+                opts: ['User interface design.', 'Concrete design and architecture of the system.',
+                    'Deployment scripts.', 'Backup procedures.'
+                ],
+                correct: 1,
+                expl: 'نمذجة التهديدات الإضافية تستند إلى <strong>التصميم الملموس وهندسة النظام</strong> لتحديد تهديدات جديدة قد تظهر مع تفاصيل التصميم.'
+            }, {
+                id: 99,
+                q: 'The concrete security design ties into:',
+                opts: ['The functional requirements only.', 'The concrete threat model.',
+                    'The deployment environment.', 'The user interface design.'
+                ],
+                correct: 1,
+                expl: 'تصميم الأمان الملموس يرتبط بـ <strong>نموذج التهديدات الملموس</strong> لضمان معالجة جميع التهديدات المحددة في التصميم.'
+            }, {
+                id: 100,
+                q: 'In the design phase, actors are defined in terms of:',
+                opts: ['Their abilities and permissions.', 'Their physical location.', 'Their hardware requirements.',
+                    'Their programming skills.'
+                ],
+                correct: 0,
+                expl: 'يتم تعريف الفاعلين من حيث <strong>قدراتهم وصلاحياتهم</strong> لتحديد ما يمكن لكل نوع من المستخدمين فعله في النظام.'
+            }];
+
+            // ─── App State ───
+            const TOTAL_QUESTIONS = questions.length;
+            let currentIndex = 0;
+            let userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+            let timerSeconds = 0;
+            let timerInterval = null;
+            let examStarted = false;
+            let examFinished = false;
+
+            const dynamicContent = document.getElementById('dynamicContent');
+            const btnRow = document.getElementById('btnRow');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const progressPercent = document.getElementById('progressPercent');
+            const qCount = document.getElementById('qCount');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const timerBadge = document.getElementById('timerBadge');
+
+            function startTimer() {
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    updateTimerDisplay();
+                }, 1000);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            function updateTimerDisplay() {
+                const mins = Math.floor(timerSeconds / 60);
+                const secs = timerSeconds % 60;
+                timerDisplay.textContent =
+                    String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }
+
+            function getTimerString() {
+                const mins = Math.floor(timerSeconds / 60);
+                const secs = timerSeconds % 60;
+                return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }
+
+            function updateProgress() {
+                const answered = userAnswers.filter(a => a !== null).length;
+                const pct = Math.round((answered / TOTAL_QUESTIONS) * 100);
+                progressBar.style.width = pct + '%';
+                progressPercent.textContent = pct + '%';
+                progressText.textContent = answered + ' من ' + TOTAL_QUESTIONS + ' تمت الإجابة';
+                qCount.textContent = (currentIndex + 1) + '/' + TOTAL_QUESTIONS;
+            }
+
+            function renderWelcome() {
+                dynamicContent.innerHTML = `
+                <div class="welcome-screen">
+                  <div class="welcome-icon">🛡️</div>
+                  <h2>Software Security MCQ Exam</h2>
+                  <p>اختبر معرفتك من خلال <strong>${TOTAL_QUESTIONS} سؤال</strong> باللغة الإنجليزية، مع شرح مفصل بالعربية بعد كل إجابة.</p>
+                  <div class="feature-grid">
+                    <div class="feature-item"><span>📋</span> ${TOTAL_QUESTIONS} English Questions</div>
+                    <div class="feature-item"><span>⏱</span> مؤقت للاختبار</div>
+                    <div class="feature-item"><span>✅</span> تصحيح مع شرح عربي</div>
+                    <div class="feature-item"><span>📊</span> تقرير مفصل بالنتائج</div>
+                  </div>
+                  <button class="btn-start" onclick="startExam()">🚀 ابدأ الاختبار الآن</button>
+                </div>`;
+                btnRow.innerHTML = '';
+                progressBar.style.width = '0%';
+                progressPercent.textContent = '0%';
+                progressText.textContent = 'لم يبدأ';
+                qCount.textContent = '0/' + TOTAL_QUESTIONS;
+                timerDisplay.textContent = '00:00';
+                timerBadge.classList.remove('timer-badge');
+                timerBadge.style.borderColor = '#2a2a40';
+                timerBadge.style.color = '#b0b0c0';
+            }
+
+            function renderQuestion() {
+                if (examFinished) return;
+                const q = questions[currentIndex];
+                const selected = userAnswers[currentIndex];
+                let optsHTML = '';
+                const letters = ['A', 'B', 'C', 'D'];
+                q.opts.forEach((opt, i) => {
+                    const selClass = selected === i ? ' selected' : '';
+                    optsHTML += `
+                    <li class="option-item${selClass}" onclick="selectOption(${i})">
+                      <span class="option-radio"></span>
+                      <span class="option-letter">${letters[i]}</span>
+                      <span>${opt}</span>
+                    </li>`;
+                });
+                dynamicContent.innerHTML = `
+                <div class="quiz-body">
+                  <div class="question-card">
+                    <span class="question-number">Question ${currentIndex + 1} of ${TOTAL_QUESTIONS}</span>
+                    <div class="question-text">${q.q}</div>
+                    <ul class="options-list">${optsHTML}</ul>
+                  </div>
+                </div>`;
+                renderButtons();
+                updateProgress();
+            }
+
+            function renderButtons() {
+                let html = '';
+                html +=
+                    `<button class="btn btn-prev" onclick="prevQuestion()" ${currentIndex === 0 ? 'disabled' : ''}>⬅️ السابق</button>`;
+                if (currentIndex < TOTAL_QUESTIONS - 1) {
+                    html += `<button class="btn btn-next" onclick="nextQuestion()">التالي ➡️</button>`;
+                } else {
+                    html +=
+                        `<button class="btn btn-submit" onclick="submitExam()">✅ إنهاء الاختبار وعرض النتيجة</button>`;
+                }
+                btnRow.innerHTML = html;
+            }
+
+            window.selectOption = function(optionIndex) {
+                if (examFinished) return;
+                userAnswers[currentIndex] = optionIndex;
+                renderQuestion();
+            };
+            window.nextQuestion = function() {
+                if (currentIndex < TOTAL_QUESTIONS - 1) {
+                    currentIndex++;
+                    renderQuestion();
+                    dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+            window.prevQuestion = function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    renderQuestion();
+                    dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+
+            window.startExam = function() {
+                examStarted = true;
+                examFinished = false;
+                currentIndex = 0;
+                userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+                timerSeconds = 0;
+                updateTimerDisplay();
+                timerBadge.classList.add('timer-badge');
+                startTimer();
+                renderQuestion();
+                dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+
+            window.submitExam = function() {
+                if (examFinished) return;
+                const skipped = userAnswers.filter(a => a === null).length;
+                if (skipped > 0) {
+                    const confirmSubmit = confirm(
+                        `⚠️ لديك ${skipped} سؤال بدون إجابة. هل تريد إنهاء الاختبار وعرض النتيجة؟`);
+                    if (!confirmSubmit) return;
+                }
+                examFinished = true;
+                stopTimer();
+                timerBadge.classList.remove('timer-badge');
+                timerBadge.style.borderColor = '#2a2a40';
+                timerBadge.style.color = '#b0b0c0';
+                renderResults();
+            };
+
+            function renderResults() {
+                let correctCount = 0;
+                let wrongCount = 0;
+                let skippedCount = 0;
+                const reviewCards = [];
+
+                questions.forEach((q, i) => {
+                    const userAns = userAnswers[i];
+                    const isCorrect = userAns === q.correct;
+                    const isSkipped = userAns === null;
+                    if (isSkipped) skippedCount++;
+                    else if (isCorrect) correctCount++;
+                    else wrongCount++;
+
+                    let cardClass = 'review-card';
+                    let statusIcon = '';
+                    let userAnsText = '';
+                    if (isSkipped) {
+                        cardClass += ' skipped-card';
+                        statusIcon = '⚠️';
+                        userAnsText = '<span style="color:#ffa502;">لم تتم الإجابة</span>';
+                    } else if (isCorrect) {
+                        cardClass += ' correct-card';
+                        statusIcon = '✅';
+                        userAnsText = `<span class="correct-ans">${q.opts[userAns]}</span>`;
+                    } else {
+                        cardClass += ' wrong-card';
+                        statusIcon = '❌';
+                        userAnsText = `<span class="user-ans">${q.opts[userAns]}</span>`;
+                    }
+
+                    reviewCards.push(`
+                    <div class="${cardClass}">
+                      <div class="review-q"><span class="icon-indicator">${statusIcon}</span> سؤال ${i + 1}: ${q.q}</div>
+                      <div class="review-answer">إجابتك: ${userAnsText}</div>
+                      <div class="review-answer">الإجابة الصحيحة: <span class="correct-ans">${q.opts[q.correct]}</span></div>
+                      <div class="review-explanation">💡 <strong>الشرح:</strong> ${q.expl}</div>
+                    </div>`);
+                });
+
+                const scorePct = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+                let gradeClass = 'grade-poor';
+                let gradeText = 'بحاجة للتحسين';
+                if (scorePct >= 90) { gradeClass = 'grade-excellent';
+                    gradeText = 'ممتاز! 🌟'; } else if (scorePct >= 70) { gradeClass = 'grade-good';
+                    gradeText = 'جيد جداً 👍'; } else if (scorePct >= 50) { gradeClass = 'grade-fair';
+                    gradeText = 'مقبول 📚'; }
+
+                const timerStr = getTimerString();
+
+                dynamicContent.innerHTML = `
+                <div class="results-container" style="--score-pct:${scorePct};">
+                  <div class="results-hero">
+                    <div class="score-circle">
+                      <div class="score-inner">
+                        <span class="score-number">${scorePct}%</span>
+                        <span class="score-total">النتيجة</span>
+                      </div>
+                    </div>
+                    <div class="results-grade ${gradeClass}">${gradeText}</div>
+                  </div>
+                  <div class="results-stats">
+                    <div class="result-stat"><div class="val correct">${correctCount}</div><div class="lbl">✅ صحيحة</div></div>
+                    <div class="result-stat"><div class="val wrong">${wrongCount}</div><div class="lbl">❌ خاطئة</div></div>
+                    <div class="result-stat"><div class="val skipped">${skippedCount}</div><div class="lbl">⚠️ بدون إجابة</div></div>
+                    <div class="result-stat"><div class="val" style="color:#c0c0d0;">${timerStr}</div><div class="lbl">⏱ الوقت</div></div>
+                  </div>
+                  <h3 style="margin-bottom:14px;color:#fff;">📋 مراجعة الأسئلة:</h3>
+                  <div class="review-section">${reviewCards.join('')}</div>
+                </div>`;
+                btnRow.innerHTML =
+                    `<button class="btn btn-next" onclick="restartExam()" style="margin:0 auto;">🔄 إعادة الاختبار</button>`;
+                progressBar.style.width = '100%';
+                progressPercent.textContent = '100%';
+                progressText.textContent = 'اكتمل الاختبار';
+                qCount.textContent = TOTAL_QUESTIONS + '/' + TOTAL_QUESTIONS;
+                dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            window.restartExam = function() {
+                stopTimer();
+                examStarted = false;
+                examFinished = false;
+                currentIndex = 0;
+                userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
+                timerSeconds = 0;
+                updateTimerDisplay();
+                timerBadge.classList.remove('timer-badge');
+                timerBadge.style.borderColor = '#2a2a40';
+                timerBadge.style.color = '#b0b0c0';
+                renderWelcome();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            document.addEventListener('keydown', function(e) {
+                if (examFinished || !examStarted) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (currentIndex < TOTAL_QUESTIONS - 1) {
+                        currentIndex++;
+                        renderQuestion();
+                        dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        renderQuestion();
+                        dynamicContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else if (e.key >= '1' && e.key <= '4') {
+                    e.preventDefault();
+                    const optIndex = parseInt(e.key) - 1;
+                    if (optIndex < questions[currentIndex].opts.length) {
+                        userAnswers[currentIndex] = optIndex;
+                        renderQuestion();
+                    }
+                } else if (e.key === 'Enter' && currentIndex === TOTAL_QUESTIONS - 1) {
+                    e.preventDefault();
+                    window.submitExam();
+                }
+            });
+
+            renderWelcome();
+            updateTimerDisplay();
+
+            console.log('🛡️ Software Security Exam Ready | ' + TOTAL_QUESTIONS +
+                ' English Questions | Arabic Explanations');
+        })();
+    </script>
+</body>
+</html>
